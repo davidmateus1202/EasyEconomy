@@ -6,7 +6,7 @@ import 'package:easyeconomy/pages/NavegacionUsuario/perfil.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-const endpoint = 'http://127.0.0.1:8000/transaccion/';
+const endpoint = 'http://10.13.129.146:8000/transaccion/';
 
 // REALIZAR OPERACIONES SOBRE LAS TRANSACCIONES
 

@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 // clase para manejar las peticiones a la api
 
 class Api {
-  static String BaseUrl = "http://127.0.0.1:8000";
+  static String BaseUrl = "http://10.13.129.146:8000";
 }
 
 // metodo para registrar un usuario

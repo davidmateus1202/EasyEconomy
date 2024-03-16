@@ -33,8 +33,8 @@ class _EasyEconomyState extends State<EasyEconomy> {
         debugShowCheckedModeBanner: false,
         title: 'Easy Economy',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+          primaryColor: Colors.white),
+        darkTheme: ThemeData.dark(),
         home: const Login_Page(),
         routes: {
           '/login': (context) => const Login_Page(),

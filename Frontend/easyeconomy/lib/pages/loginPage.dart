@@ -27,7 +27,6 @@ class _Login_PageState extends State<Login_Page> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      backgroundColor: HexColor('5C10C7'),
       body: Container(
         child: ListView(
           children: [

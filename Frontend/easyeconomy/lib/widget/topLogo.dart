@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:snippet_coder_utils/hex_color.dart';
 
 class Top_logo_register extends StatefulWidget {
   const Top_logo_register({super.key});
@@ -19,7 +20,7 @@ class _Top_logo_registerState extends State<Top_logo_register> {
           Container(
             height: MediaQuery.of(context).size.height * 0.30,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: HexColor('F4F2FF'),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(80),
                 bottomRight: Radius.circular(80),

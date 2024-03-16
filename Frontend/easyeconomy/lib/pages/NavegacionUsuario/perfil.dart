@@ -24,6 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
   UserModer? user;
   late Future<List<TransaccionesModel>?> _futureTransacciones;
 
+
   @override
   void initState() {
     super.initState();
@@ -74,9 +75,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[175],
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
       ),
       drawer: DrawerHome(),
       body: Container(
@@ -103,16 +103,18 @@ class _ProfilePageState extends State<ProfilePage> {
                         itemCount: data.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Container(
-                              height: 100,
+                              height: 120,
                               width: 200,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 24, vertical: 10),
                                 child: Card(
+                                  shadowColor: data[index].tipo.toString() == 'ingreso' ? HexColor('3BED62') : HexColor('FF6767'),
                                   elevation: 4,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
+                                  
                                   child: Column(
                                     children: [
                                       Padding(
@@ -125,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 Text(
                                                   data[index].tipo.toString(),
                                                   style: TextStyle(
-                                                    color: HexColor('5C10C7'),
+                                                    color: Colors.white,
                                                     fontSize: 12,
                                                     fontWeight: FontWeight.bold,
                                                   ),
@@ -133,20 +135,20 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 SizedBox(height: 10),
                                                 Icon(
                                                   Icons.monetization_on,
-                                                  color: HexColor('5C10C7'),
+                                                  color: Colors.white,
                                                 ),
                                               ],
                                             ),
                                             Expanded(child: Container()),
                                             Column(
-                                              children: [                                              
+                                              children: [
                                                 Text(
                                                   data[index]
                                                       .monto!
                                                       .toDouble()
                                                       .toString(),
                                                   style: TextStyle(
-                                                      color: HexColor('5C10C7'),
+                                                      color: Colors.white,
                                                       fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.normal),
@@ -156,19 +158,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                                       .descripcion
                                                       .toString(),
                                                   style: TextStyle(
-                                                      color: HexColor('5C10C7'),
+                                                      color: Colors.white,
                                                       fontSize: 12,
                                                       fontWeight:
                                                           FontWeight.bold),
                                                 ),
                                                 Text(
-                                                  DateFormat.yMEd().add_jms().format(data[index].fecha!),
+                                                  DateFormat.yMEd()
+                                                      .add_jms()
+                                                      .format(
+                                                          data[index].fecha!),
                                                   style: TextStyle(
-                                                      color: HexColor('5C10C7'),
+                                                      color: Colors.white,
                                                       fontSize: 10,
                                                       fontWeight:
                                                           FontWeight.normal),
-                                                ),                                                                                               ],
+                                                ),
+                                              ],
                                             )
                                           ],
                                         ),
@@ -199,7 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Movimientos(),
                   ],
                 ),
-              ),           
+              ),
             )
           ],
         ),
@@ -225,7 +231,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Text(
                 '@${user!.name}',
                 style: TextStyle(
-                    color: HexColor('5C10C7'),
+                    color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
@@ -234,7 +240,7 @@ class _ProfilePageState extends State<ProfilePage> {
               text: TextSpan(
                 text: 'Movimientos Mensuales',
                 style: TextStyle(
-                  color: HexColor('5C10C7'),
+                  color: Colors.white,
                   fontSize: 12,
                   fontStyle: FontStyle.italic,
                 ),
@@ -251,13 +257,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Text('0.0000.000',
                           style: TextStyle(
-                              color: HexColor('5C10C7'),
+                              color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.normal)),
                       Text(
                         'Ingresos',
                         style: TextStyle(
-                            color: HexColor('5C10C7'),
+                            color: Colors.white,
                             fontSize: 12,
                             fontWeight: FontWeight.bold),
                       ),
@@ -266,19 +272,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   Container(
                     width: 0.5,
                     height: 45,
-                    color: HexColor('5C10C7'),
+                    color: Colors.white,
                   ),
                   Column(
                     children: [
                       Text('0.0000.000',
                           style: TextStyle(
-                              color: HexColor('5C10C7'),
+                              color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.normal)),
                       Text(
                         'Egresos',
                         style: TextStyle(
-                            color: HexColor('5C10C7'),
+                            color: Colors.white,
                             fontSize: 12,
                             fontWeight: FontWeight.bold),
                       ),
@@ -302,7 +308,7 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Text(
             'Registra tus movimientos',
             style: TextStyle(
-              color: HexColor('5C10C7'),
+              color: Colors.white,
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),
@@ -314,67 +320,68 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget Movimientos() {
     return FloatingActionButton(
-        shape: CircleBorder(),
-        backgroundColor: HexColor('5C10C7'),
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
+      shape: CircleBorder(),
+      backgroundColor: HexColor('5c10c7'),
+      child: Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
       onPressed: () {
-      showModalBottomSheet(
+        showModalBottomSheet(
+          isScrollControlled: true,
           context: context,
           builder: (BuildContext context) {
-            return Container(
-              height: MediaQuery.of(context).size.height * 0.70,
-              width: MediaQuery.of(context).size.width * 0.90,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 24, vertical: 10),
-                        child: Text(
-                          'Registra tus movimientos',
-                          style: TextStyle(
-                            color: HexColor('5C10C7'),
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
+            return SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                height: MediaQuery.of(context).size.height * 0.6,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Text(
+                        'Registra tus movimientos',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.70,
-                    child: TextFormMovimientos(),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.70,
-                    child: TextFormTipo(),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.70,
-                    child: TextFormConcepto(),
-                  ),
-                  Container(
-                      width: MediaQuery.of(context).size.width * 0.70,
-                      child: ButtonMovimientos()),
-                  SizedBox(height: 15,)
-                ],
+                    ),
+                    SizedBox(height: 15),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      child: TextFormMovimientos(),
+                    ),
+                    SizedBox(height: 15),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      child: TextFormTipo(),
+                    ),
+                    SizedBox(height: 15),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      child: TextFormConcepto(),
+                    ),
+                    SizedBox(height: 15),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      child: ButtonMovimientos(),
+                    ),
+                    SizedBox(height: 15),
+                  ],
+                ),
               ),
             );
-          });
-    });
+          },
+        );
+      },
+    );
   }
 
   // method to create textoform for ingresos
@@ -397,17 +404,17 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: HexColor('5C10C7')),
+              borderSide: BorderSide(color: Colors.white),
             ),
             label: Text('Valor'),
             labelStyle: TextStyle(
-              color: HexColor('5C10C7'),
+              color: Colors.white,
               fontSize: 12,
             ),
-            prefixIcon: Icon(Icons.attach_money, color: HexColor('5C10C7')),
+            prefixIcon: Icon(Icons.attach_money, color: Colors.white),
           ),
           validator: (value) {
-            if ( value == null || value!.isEmpty) {
+            if (value == null || value!.isEmpty) {
               return 'Por favor ingrese un valor';
             }
           },
@@ -434,14 +441,14 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: HexColor('5C10C7')),
+              borderSide: BorderSide(color: Colors.white),
             ),
             label: Text('Tipo de movimiento'),
             labelStyle: TextStyle(
-              color: HexColor('5C10C7'),
+              color: Colors.white,
               fontSize: 12,
             ),
-            prefixIcon: Icon(Icons.payment, color: HexColor('5C10C7')),
+            prefixIcon: Icon(Icons.payment, color: Colors.white),
           ),
           validator: (value) {
             if (value!.isEmpty || value == null) {
@@ -471,14 +478,14 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: HexColor('5C10C7')),
+              borderSide: BorderSide(color: Colors.white),
             ),
             label: Text('Concepto'),
             labelStyle: TextStyle(
-              color: HexColor('5C10C7'),
+              color: Colors.white,
               fontSize: 12,
             ),
-            prefixIcon: Icon(Icons.find_in_page, color: HexColor('5C10C7')),
+            prefixIcon: Icon(Icons.find_in_page, color: Colors.white),
           ),
           validator: (value) {
             if (value!.isEmpty || value == null) {
@@ -533,7 +540,7 @@ class _ProfilePageState extends State<ProfilePage> {
           child: Text(
             'Movimientos',
             style: TextStyle(
-              color: HexColor('5C10C7'),
+              color: Colors.white,
               fontSize: 15,
               fontWeight: FontWeight.bold,
             ),

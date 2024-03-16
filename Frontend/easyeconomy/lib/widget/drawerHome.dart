@@ -1,6 +1,7 @@
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/Home.dart';
+import 'package:easyeconomy/pages/NavegacionUsuario/feed.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil.dart';
 import 'package:easyeconomy/pages/loginPage.dart';
 import 'package:easyeconomy/service/api.dart';
@@ -126,7 +127,9 @@ class _DrawerHomeState extends State<DrawerHome> {
                   ListTile(
                     leading: Icon(Icons.feed),
                     title: const Text('Feed'),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => FeedPage()));
+                    },
                   ),
                   Divider(
                     height: 10,

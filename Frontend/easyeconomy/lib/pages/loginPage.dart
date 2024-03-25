@@ -85,7 +85,7 @@ class _Login_PageState extends State<Login_Page> {
 
   Widget _PaddinForm() {
     return Container(
-        child: Padding(
+      child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Column(
         children: [
@@ -111,6 +111,7 @@ class _Login_PageState extends State<Login_Page> {
       child: const Text(
         'Login',
         style: TextStyle(
+          fontFamily: 'Poppins',
           color: Colors.white,
           fontSize: 30,
           fontWeight: FontWeight.bold,
@@ -131,7 +132,7 @@ class _Login_PageState extends State<Login_Page> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: const Text('Name'),
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.white, fontFamily: 'Poppins'),
         prefixIcon: Icon(Icons.person, color: Colors.white),
       ),
       controller: nameController,
@@ -155,7 +156,7 @@ class _Login_PageState extends State<Login_Page> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: const Text('Password'),
-        labelStyle: const TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.white, fontFamily: 'Poppins'),
         prefixIcon: Icon(Icons.lock, color: Colors.white),
       ),
       controller: passwordController,
@@ -180,10 +181,10 @@ class _Login_PageState extends State<Login_Page> {
             login(name, password);
           }
         },
-        child: const Text('Login'),
+        child: const Text('Login', style: TextStyle(fontFamily: 'Poppins'),),
         style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          onPrimary: HexColor('066269'),
+          primary: HexColor('5C10C7'),
+          onPrimary: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
         ),
       ),
@@ -201,11 +202,12 @@ class _Login_PageState extends State<Login_Page> {
             children: <TextSpan>[
               const TextSpan(
                   text: 'Don\'t have an account? ',
-                  style: TextStyle(color: Color.fromARGB(104, 242, 250, 253))),
+                  style: TextStyle(color: Color.fromARGB(104, 242, 250, 253), fontFamily: 'Poppins')),
               TextSpan(
                 text: 'Sing up',
                 style: const TextStyle(
                   decoration: TextDecoration.underline,
+                  fontFamily: 'Poppins',
                 ),
 
                 //navigate to register page when user click on sing up

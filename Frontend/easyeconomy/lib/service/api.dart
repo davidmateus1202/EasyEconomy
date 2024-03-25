@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 // clase para manejar las peticiones a la api
 
 class Api {
-  static String BaseUrl = "http://10.13.129.146:8000";
+  static String BaseUrl = "http://192.168.20.3:8000";
 }
 
 // metodo para registrar un usuario
@@ -30,6 +30,7 @@ Future<void> registrarUsuario(String username, String email, String password1,
 
   if (res.statusCode == 204) {
     // Registro exitoso, podrías mostrar una alerta o redirigir al usuario a otra pantalla.
+    // ignore: use_build_context_synchronously
     showDialog(
       context: context,
       builder: (BuildContext context) {

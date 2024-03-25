@@ -1,8 +1,8 @@
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/Home.dart';
-import 'package:easyeconomy/pages/NavegacionUsuario/feed.dart';
-import 'package:easyeconomy/pages/NavegacionUsuario/perfil.dart';
+import 'package:easyeconomy/pages/NavegacionUsuario/feed/feed.dart';
+import 'package:easyeconomy/pages/NavegacionUsuario/perfil/perfil.dart';
 import 'package:easyeconomy/pages/loginPage.dart';
 import 'package:easyeconomy/service/api.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +47,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                 Text(
                   '@${user!.name}',
                   style: TextStyle(
+                      fontFamily: 'Poppins',
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold),
@@ -54,6 +55,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                 Text(
                   '${user!.email}',
                   style: TextStyle(
+                    fontFamily: 'Poppins',
                     color: Colors.white,
                     fontSize: 10,
                     fontStyle: FontStyle.italic,
@@ -72,7 +74,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                 children: [
                   ListTile(
                     leading: Icon(Icons.home),
-                    title: const Text('Home'),
+                    title: const Text('Home', style: TextStyle(fontFamily: 'Poppins'),),
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
@@ -88,7 +90,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                   ),
                   ListTile(
                     leading: Icon(Icons.person),
-                    title: const Text('Profile'),
+                    title: const Text('Profile', style: TextStyle(fontFamily: 'Poppins'),),
                     onTap: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
@@ -104,7 +106,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                   ),
                   ListTile(
                     leading: Icon(Icons.settings),
-                    title: const Text('Dasbohard'),
+                    title: const Text('Dasbohard', style: TextStyle(fontFamily: 'Poppins'),),
                     onTap: () {},
                   ),
                   Divider(
@@ -115,7 +117,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                   ),
                   ListTile(
                     leading: Icon(Icons.chat),
-                    title: const Text('Chat'),
+                    title: const Text('Chat', style: TextStyle(fontFamily: 'Poppins'),),
                     onTap: () {},
                   ),
                   Divider(
@@ -126,7 +128,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                   ),
                   ListTile(
                     leading: Icon(Icons.feed),
-                    title: const Text('Feed'),
+                    title: const Text('Feed', style: TextStyle(fontFamily: 'Poppins'),),
                     onTap: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => FeedPage()));
                     },
@@ -155,6 +157,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                 ),
                 title: const Text('Logout',
                     style: TextStyle(
+                      fontFamily: 'Poppins',
                       color: Colors.white,
                     )),
                 onTap: () async {

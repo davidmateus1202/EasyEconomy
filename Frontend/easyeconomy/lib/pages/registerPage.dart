@@ -1,13 +1,9 @@
-// ignore_for_file: non_constant_identifier_names
 
-import 'package:easyeconomy/models/user_cubir.dart';
-import 'package:easyeconomy/models/user_model.dart';
-import 'package:easyeconomy/pages/NavegacionUsuario/Home.dart';
 import 'package:easyeconomy/service/api.dart';
 import 'package:easyeconomy/widget/topLogo.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:snippet_coder_utils/hex_color.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -32,7 +28,6 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: HexColor('5C10C7'),
         body: Center(
           child: ListView(
             children: [
@@ -92,9 +87,10 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Widget TextRegister() {
-    return Text(
+    return const Text(
       'Register',
       style: TextStyle(
+        fontFamily: 'Poppins',
         color: Colors.white,
         fontSize: 30,
         fontWeight: FontWeight.bold,
@@ -114,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: Text('Name'),
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
         prefixIcon: Icon(
           Icons.person,
           color: Colors.white,
@@ -140,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: Text('Email'),
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
         prefixIcon: Icon(
           Icons.email,
           color: Colors.white,
@@ -174,7 +170,7 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: Text('Password'),
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
         prefixIcon: const Icon(
           Icons.lock,
           color: Colors.white,
@@ -201,7 +197,7 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: Text('Confirm password'),
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
         prefixIcon: const Icon(
           Icons.lock,
           color: Colors.white,
@@ -242,24 +238,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text('Registration Failed'),
-                    content: Text('Please try again later'),
+                    title: Text('Registration Failed', style: TextStyle(fontFamily: 'Poppins'),),
+                    content: Text('Please try again later', style: TextStyle(fontFamily: 'Poppins'),),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('OK'),
+                        child: Text('OK', style: TextStyle(fontFamily: 'Poppins'),),
                       )
                     ],
                   );
                 });
           }
         },
-        child: Text('Register'),
+        child: Text('Register', style: TextStyle(fontFamily: 'Poppins'),),
         style: ElevatedButton.styleFrom(
-          primary: Colors.white,
-          onPrimary: HexColor('066269'),
+          primary: HexColor('5C10C7'),
+          onPrimary: Colors.white,
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
         ),
       ),
@@ -277,11 +273,12 @@ class _RegisterPageState extends State<RegisterPage> {
             children: <TextSpan>[
               TextSpan(
                   text: 'You have an account? ',
-                  style: TextStyle(color: Color.fromARGB(104, 242, 250, 253))),
+                  style: TextStyle(color: Color.fromARGB(104, 242, 250, 253), fontFamily: 'Poppins')),
               TextSpan(
                 text: 'Login',
                 style: TextStyle(
                   decoration: TextDecoration.underline,
+                  fontFamily: 'Poppins',
                 ),
 
                 //navigate to register page when user click on sing up

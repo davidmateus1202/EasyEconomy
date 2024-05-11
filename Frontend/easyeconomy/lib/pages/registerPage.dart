@@ -76,22 +76,12 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Widget _photoProfile() {
-    return CircleAvatar(
-      backgroundImage: AssetImage(
-        'assets/images/user_profile_2.png',
-      ),
-      radius: 100,
-      backgroundColor: Colors.white,
-    );
-  }
 
   Widget TextRegister() {
     return const Text(
       'Register',
       style: TextStyle(
         fontFamily: 'Poppins',
-        color: Colors.white,
         fontSize: 30,
         fontWeight: FontWeight.bold,
       ),
@@ -110,14 +100,13 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: Text('Name'),
-        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
+        labelStyle: TextStyle(fontFamily: 'Poppins'),
         prefixIcon: Icon(
           Icons.person,
-          color: Colors.white,
         ),
       ),
       validator: (value) {
-        if (value == null || value!.isEmpty) {
+        if (value == null || value.isEmpty) {
           return 'Name is required';
         }
       },
@@ -136,14 +125,13 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: Text('Email'),
-        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
+        labelStyle: TextStyle(fontFamily: 'Poppins'),
         prefixIcon: Icon(
           Icons.email,
-          color: Colors.white,
         ),
       ),
       validator: (value) {
-        if (value == null || value!.isEmpty) {
+        if (value == null || value.isEmpty) {
           return 'Email is not valid';
         }
         if (!value.contains('@')) {
@@ -170,14 +158,13 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: Text('Password'),
-        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
+        labelStyle: TextStyle( fontFamily: 'Poppins'),
         prefixIcon: const Icon(
           Icons.lock,
-          color: Colors.white,
         ),
       ),
       validator: (value) {
-        if (value == null || value!.isEmpty) {
+        if (value == null || value.isEmpty) {
           return 'Password is not valid';
         }
       },
@@ -197,14 +184,13 @@ class _RegisterPageState extends State<RegisterPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: Text('Confirm password'),
-        labelStyle: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
+        labelStyle: TextStyle(fontFamily: 'Poppins'),
         prefixIcon: const Icon(
           Icons.lock,
-          color: Colors.white,
         ),
       ),
       validator: (value) {
-        if (value == null || value!.isEmpty) {
+        if (value == null || value.isEmpty) {
           return 'Password is not valid';
         }
         if (value != _formKeyPassword.currentState!.value) {
@@ -267,18 +253,18 @@ class _RegisterPageState extends State<RegisterPage> {
       child: RichText(
         text: TextSpan(
             style: TextStyle(
-              color: Colors.white,
               fontSize: 14.0,
             ),
             children: <TextSpan>[
               TextSpan(
                   text: 'You have an account? ',
-                  style: TextStyle(color: Color.fromARGB(104, 242, 250, 253), fontFamily: 'Poppins')),
+                  style: TextStyle(color: HexColor('5C10C7'), fontFamily: 'Poppins')),
               TextSpan(
                 text: 'Login',
                 style: TextStyle(
                   decoration: TextDecoration.underline,
                   fontFamily: 'Poppins',
+                  color: HexColor('5C10C7'),
                 ),
 
                 //navigate to register page when user click on sing up

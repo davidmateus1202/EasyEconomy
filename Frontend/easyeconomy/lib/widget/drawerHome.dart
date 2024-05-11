@@ -1,12 +1,14 @@
+import 'package:easyeconomy/Chat/ChatPage.dart';
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
-import 'package:easyeconomy/pages/NavegacionUsuario/Home.dart';
+import 'package:easyeconomy/pages/Home/Home.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/feed/feed.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/perfil.dart';
 import 'package:easyeconomy/pages/loginPage.dart';
 import 'package:easyeconomy/service/api.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:snippet_coder_utils/hex_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +36,7 @@ class _DrawerHomeState extends State<DrawerHome> {
           Container(
             height: 200,
             decoration: BoxDecoration(
-                color: HexColor('5C10C7'),
+                color: HexColor('B401FF'),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20),
                   bottomRight: Radius.circular(20),
@@ -42,10 +44,19 @@ class _DrawerHomeState extends State<DrawerHome> {
             child: Center(
                 child: Column(
               children: [
-                Lottie.asset('assets/json/user2.json',
+                user?.imagen_profile != null 
+                  ? Padding(
+                    padding: const EdgeInsets.only(top: 32),
+                    child: CircleAvatar(
+                      radius: 50,
+                      backgroundImage: NetworkImage(user!.imagen_profile!),
+                    ),
+                  )
+                  : Lottie.asset('assets/json/user2.json',
                     width: 150, height: 150, fit: BoxFit.fill),
+
                 Text(
-                  '@${user!.name}',
+                  '@${user?.name}',
                   style: TextStyle(
                       fontFamily: 'Poppins',
                       color: Colors.white,
@@ -53,7 +64,7 @@ class _DrawerHomeState extends State<DrawerHome> {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '${user!.email}',
+                  '${user?.email}',
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     color: Colors.white,
@@ -105,17 +116,6 @@ class _DrawerHomeState extends State<DrawerHome> {
                     endIndent: 16,
                   ),
                   ListTile(
-                    leading: Icon(Icons.settings),
-                    title: const Text('Dasbohard', style: TextStyle(fontFamily: 'Poppins'),),
-                    onTap: () {},
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 0.3,
-                    indent: 16,
-                    endIndent: 16,
-                  ),
-                  ListTile(
                     leading: Icon(Icons.chat),
                     title: const Text('Chat', style: TextStyle(fontFamily: 'Poppins'),),
                     onTap: () {},
@@ -139,6 +139,14 @@ class _DrawerHomeState extends State<DrawerHome> {
                     indent: 16,
                     endIndent: 16,
                   ),
+                  ListTile(
+                    leading: Icon(Icons.smart_toy),
+                    title: const Text('BOB', style: TextStyle(fontFamily: 'Poppins'),),
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushReplacement(PageTransition(child: ChatFrom(), type: PageTransitionType.rightToLeftWithFade));
+                    },
+                  ),
 
                 ],
               )),
@@ -147,7 +155,7 @@ class _DrawerHomeState extends State<DrawerHome> {
             padding: const EdgeInsets.all(5.0),
             child: Container(
               decoration: BoxDecoration(
-                color: HexColor('5C10C7'),
+                color: HexColor('B401FF'),
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: ListTile(

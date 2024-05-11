@@ -1,6 +1,6 @@
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
-import 'package:easyeconomy/pages/NavegacionUsuario/Home.dart';
+import 'package:easyeconomy/pages/Home/Home.dart';
 import 'package:easyeconomy/pages/registerPage.dart';
 import 'package:easyeconomy/service/api.dart';
 import 'package:easyeconomy/widget/topLogo.dart';
@@ -23,45 +23,57 @@ class _Login_PageState extends State<Login_Page> {
   final _formKeyPassword = GlobalKey<FormFieldState>();
   final _formKeyName = GlobalKey<FormFieldState>();
 
+  bool _isloging = false;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      body: Container(
-        child: ListView(
-          children: [
-            Center(
-              child: Column(
-                children: [
-                  const Top_logo_register(),
-                  SpaceBox(),
-                  _TextLogin(),
-                  SpaceBox(),
-                  _PaddinForm(),
-                  SpaceBox(),
-                  _ButtonLogin(),
-                  SpaceBox(),
-                  const Center(
-                    child: Text(
-                      'Or',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
+    return Scaffold(
+        body: Stack(
+      children: [
+        Container(
+          child: ListView(
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    const Top_logo_register(),
+                    SpaceBox(),
+                    _TextLogin(),
+                    SpaceBox(),
+                    _PaddinForm(),
+                    SpaceBox(),
+                    _ButtonLogin(),
+                    SpaceBox(),
+                    Center(
+                      child: Text(
+                        'Or',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  _Navigator_Register()
-                ],
+                    _Navigator_Register()
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
+        if (_isloging)
+          Container(
+            color: Colors.black.withOpacity(0.5),
+            child: Center(
+                child: Image.asset(
+              'assets/images/loading.gif',
+              width: 50,
+              height: 50,
+            )),
+          )
+      ],
     ));
   }
 
   login(String name, String pssword) async {
-    var response = await userApi(name, pssword);
+    var response = await userApi(name, pssword, context);
     print(response.runtimeType);
     if (response.runtimeType == String) {
       showDialog(
@@ -76,16 +88,18 @@ class _Login_PageState extends State<Login_Page> {
               ),
             );
           });
-    }else if(response.runtimeType == UserModer){
+    } else if (response.runtimeType == UserModer) {
       UserModer user = response;
       context.read<UserCubit>().emit(user);
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) {return Home();}));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+        return Home();
+      }));
     }
   }
 
   Widget _PaddinForm() {
     return Container(
-      child: Padding(
+        child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
       child: Column(
         children: [
@@ -112,7 +126,6 @@ class _Login_PageState extends State<Login_Page> {
         'Login',
         style: TextStyle(
           fontFamily: 'Poppins',
-          color: Colors.white,
           fontSize: 30,
           fontWeight: FontWeight.bold,
         ),
@@ -132,8 +145,10 @@ class _Login_PageState extends State<Login_Page> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: const Text('Name'),
-        labelStyle: const TextStyle(color: Colors.white, fontFamily: 'Poppins'),
-        prefixIcon: Icon(Icons.person, color: Colors.white),
+        labelStyle: const TextStyle(fontFamily: 'Poppins'),
+        prefixIcon: Icon(
+          Icons.person,
+        ),
       ),
       controller: nameController,
       validator: (value) {
@@ -156,8 +171,8 @@ class _Login_PageState extends State<Login_Page> {
           borderRadius: BorderRadius.circular(10),
         ),
         label: const Text('Password'),
-        labelStyle: const TextStyle(color: Colors.white, fontFamily: 'Poppins'),
-        prefixIcon: Icon(Icons.lock, color: Colors.white),
+        labelStyle: const TextStyle(fontFamily: 'Poppins'),
+        prefixIcon: Icon(Icons.lock),
       ),
       controller: passwordController,
       validator: (value) {
@@ -173,6 +188,9 @@ class _Login_PageState extends State<Login_Page> {
       margin: const EdgeInsets.symmetric(horizontal: 90),
       child: ElevatedButton(
         onPressed: () {
+          setState(() {
+            _isloging = true;
+          });
           if (_formKeyName.currentState!.validate() &&
               _formKeyPassword.currentState!.validate()) {
             String name = nameController.text.trim();
@@ -180,8 +198,14 @@ class _Login_PageState extends State<Login_Page> {
 
             login(name, password);
           }
+          setState(() {
+            _isloging = false;
+          });
         },
-        child: const Text('Login', style: TextStyle(fontFamily: 'Poppins'),),
+        child: const Text(
+          'Login',
+          style: TextStyle(fontFamily: 'Poppins'),
+        ),
         style: ElevatedButton.styleFrom(
           primary: HexColor('5C10C7'),
           onPrimary: Colors.white,
@@ -195,26 +219,29 @@ class _Login_PageState extends State<Login_Page> {
     return Center(
       child: RichText(
         text: TextSpan(
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
               fontSize: 14.0,
             ),
             children: <TextSpan>[
-              const TextSpan(
+              TextSpan(
                   text: 'Don\'t have an account? ',
-                  style: TextStyle(color: Color.fromARGB(104, 242, 250, 253), fontFamily: 'Poppins')),
+                  style: TextStyle(
+                      color: HexColor('B401FF'), fontFamily: 'Poppins')),
               TextSpan(
                 text: 'Sing up',
-                style: const TextStyle(
+                style: TextStyle(
                   decoration: TextDecoration.underline,
                   fontFamily: 'Poppins',
+                  color: HexColor('B401FF'),
                 ),
 
                 //navigate to register page when user click on sing up
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                      return RegisterPage();}));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return RegisterPage();
+                    }));
                   },
               )
             ]),

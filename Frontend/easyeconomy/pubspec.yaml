@@ -43,6 +43,9 @@ dependencies:
   modal_progress_hud_nsn: ^0.5.1
   cloudinary_flutter: ^1.0.0
   cloudinary_url_gen: ^1.0.0
+  provider: ^6.1.2
+  fl_chart: ^0.67.0
+  page_transition: ^2.1.0
 
 
   # The following adds the Cupertino Icons font to your application.

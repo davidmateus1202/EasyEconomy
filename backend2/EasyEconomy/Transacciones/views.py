@@ -4,6 +4,8 @@ from rest_framework.response import Response
 from .serializer import TransaccionSerializer, TransaccionSaveSerializer
 from rest_framework.generics import ListCreateAPIView
 from .models import Transaccion
+from django.contrib.auth import get_user_model
+from django.db.models import Sum
 
 @api_view(['POST'])
 def CrearTransaccion(request):
@@ -29,6 +31,31 @@ class ListarTransacciones(ListCreateAPIView):
     def get_queryset(self):
         queryset = Transaccion.objects.filter(usuario = self.request.user)
         return queryset
+    
 
-def ObtenerTransaccion(request):
-    pass
+    
+@api_view(['GET'])
+def ObtenerTransaccion(request, pk):
+    
+    if request.method == 'GET':
+        user = get_user_model().objects.get(pk=pk)
+
+        sumatoria = Transaccion.objects.filter(usuario = user, tipo = 'egreso').values('fecha__date').annotate(total=Sum('monto')).order_by('fecha__date')
+
+        sumatoria_list = [{'fecha': item['fecha__date'], 'total': item['total']} for item in sumatoria]
+
+        print(sumatoria_list)
+
+        return Response(sumatoria_list, status=200)
+    return Response({}, status=400)
+
+
+@api_view(['GET'])
+def ObtenerTotalIngresos(request, pk):
+
+    if request.method == 'GET':
+        user = get_user_model().objects.get(pk = pk)
+
+        sumatoria = Transaccion.objects.filter(usuario = user, tipo = 'ingreso').aggregate(total = Sum('monto'))['total'] or 0
+
+        return Response({'total': sumatoria}, status=200)

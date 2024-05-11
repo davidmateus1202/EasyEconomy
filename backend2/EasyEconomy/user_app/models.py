@@ -8,7 +8,7 @@ def upload_to( inst, filename):
 
 class UserModel(AbstractUser):
     username = models.CharField(max_length=255, unique=True)
-    foto_perfil = ResizedImageField(upload_to=upload_to, null=True, blank=True)
+    imagen_profile = models.URLField(blank=True, null=True)
 
     class Meta(AbstractUser.Meta):
         swappable = 'AUTH_USER_MODEL'

@@ -46,7 +46,7 @@ class _EasyEconomyState extends State<EasyEconomy> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => CambioTema(ThemeData.dark()),
+      create: (_) => CambioTema(ThemeData.light()),
       child: MaterialWidget(),
     );
   }

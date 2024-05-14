@@ -10,13 +10,27 @@ import 'package:http/http.dart' as http;
 // REALIZAR OPERACIONES SOBRE LAS TRANSACCIONES
 
 CrearTransaccion(UserModer user, String tipo, double monto, String descripcion,
-    context) async {
-  Map data = {
+    var id, context) async {
+  Map data = {};
+  if(id != null){
+    data = {
     'usuario': '${user.id}',
     'tipo': tipo,
     'monto': '$monto',
     'descripcion': descripcion,
+    'id_Categoria': '$id',
   };
+
+  }else {
+    data = {
+    'usuario': '${user.id}',
+    'tipo': tipo,
+    'monto': '$monto',
+    'descripcion': descripcion,
+    
+  };
+  }
+
   var url = Uri.parse('${Api.BaseUrl}/transaccion/crearTransaccion/');
 
   var response = await http.post(url, body: data, headers: {

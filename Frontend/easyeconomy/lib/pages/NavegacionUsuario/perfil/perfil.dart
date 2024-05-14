@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:easyeconomy/pages/NavegacionUsuario/perfil/bolsillos.dart';
-import 'package:easyeconomy/pages/loginPage.dart';
+import 'package:easyeconomy/pages/Home/BarGraph.dart';
+import 'package:easyeconomy/pages/NavegacionUsuario/perfil/Gastos.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/widgetButtons.dart';
-import 'package:easyeconomy/service/apiSumary.dart';
 import 'package:flutter/gestures.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -12,7 +11,6 @@ import 'package:easyeconomy/models/TransaccionModel.dart';
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/service/api.dart';
-import 'package:easyeconomy/service/apiTransacciones.dart';
 import 'package:easyeconomy/widget/drawerHome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
   //////////// control de pantalla de carga ///////////////////////
   bool _isLoad = false;
   UserModer? user;
+  int op = 0;
   late Future<List<TransaccionesModel>?> _futureTransacciones;
 
   @override
@@ -143,7 +142,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 20,
                   ),
-                  ContainerMovimientos(),
+                  op == 0 ?
+                  ContainerMovimientos()
+                  : Expanded(child: BarGraph(),),
                   SizedBox(
                     height: 20,
                   ),
@@ -346,7 +347,7 @@ class _ProfilePageState extends State<ProfilePage> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
         image: DecorationImage(
-          image: AssetImage('assets/images/4.png'),
+          image: AssetImage('assets/images/button.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -357,9 +358,11 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               IconButton(
                   onPressed: () {
-                    TotalSaldo(user!);
+                    setState(() {
+                      op = 0;
+                    });
                   },
-                  icon: Icon(Icons.person)),
+                  icon: Icon(Icons.person, color: Colors.white)),
             ],
           ),
           Column(
@@ -372,12 +375,18 @@ class _ProfilePageState extends State<ProfilePage> {
                             type: PageTransitionType.fade,
                             child: BolsilloPage()));
                   },
-                  icon: Icon(Icons.wallet)),
+                  icon: Icon(Icons.wallet, color: Colors.white)),
             ],
           ),
           Column(
             children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.person)),
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      op = 1;
+                    });
+                  },
+                  icon: Icon(Icons.person, color: Colors.white,)),
             ],
           )
         ],

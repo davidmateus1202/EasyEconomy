@@ -12,7 +12,7 @@ import 'package:snippet_coder_utils/hex_color.dart';
 // clase para manejar las peticiones a la api
 
 class Api {
-  static String BaseUrl = "http://192.168.80.16:8000";
+  static String BaseUrl = "http://192.168.10.30:8000";
 }
 
 // metodo para registrar un usuario

@@ -6,6 +6,10 @@ from rest_framework.generics import ListCreateAPIView
 from .models import Transaccion
 from django.contrib.auth import get_user_model
 from django.db.models import Sum
+from datetime import datetime
+from django.utils import timezone  
+
+
 
 @api_view(['POST'])
 def CrearTransaccion(request):
@@ -50,12 +54,48 @@ def ObtenerTransaccion(request, pk):
     return Response({}, status=400)
 
 
+
+class ListarGastosFijos(ListCreateAPIView):
+    serializer_class = TransaccionSerializer
+    queryset = Transaccion.objects.all()
+
+    def get_queryset(self):
+        queryset = Transaccion.objects.filter(usuario = self.request.user, id_Categoria = 1)
+        return queryset
+
+
 @api_view(['GET'])
-def ObtenerTotalIngresos(request, pk):
+def getTotalIngresos(request, pk):
 
     if request.method == 'GET':
         user = get_user_model().objects.get(pk = pk)
 
-        sumatoria = Transaccion.objects.filter(usuario = user, tipo = 'ingreso').aggregate(total = Sum('monto'))['total'] or 0
+        # Obtener la fecha actual
+        today = timezone.now()
 
-        return Response({'total': sumatoria}, status=200)
+        # Obtener el primer día del mes actual
+        first_day_of_month = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+
+        # Obtener el último día del mes actual
+        next_month = first_day_of_month.replace(month=first_day_of_month.month+1)
+        last_day_of_month = next_month - timezone.timedelta(days=1)
+
+        # Filtrar las transacciones del usuario para el mes actual
+        transacciones_mes_actual = Transaccion.objects.filter(
+            usuario=user,
+            tipo='ingreso',
+            fecha__range=(first_day_of_month, last_day_of_month)
+        )
+
+        # Calcular el total de ingresos para el mes actual
+        total_ingresos = transacciones_mes_actual.aggregate(total=Sum('monto'))['total'] or 0
+        total_gastos_fijos = total_ingresos * 0.5
+        total_gastos_variables = total_ingresos * 0.3
+        total_ahorro = total_ingresos * 0.2
+
+
+        return Response({'total': total_ingresos, 'Gastos_Fijos': total_gastos_fijos, 'Gastos_variables': total_gastos_variables, 'Ahorro':total_ahorro}, status=200)
+    return Response({}, status=400)
+    
+
+

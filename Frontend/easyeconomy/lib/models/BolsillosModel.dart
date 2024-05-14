@@ -1,42 +1,47 @@
 import 'dart:convert';
 
-BolsillosModel bolsillosModelFromJson(String str) => BolsillosModel.fromJson(json.decode(str));
 
-String bolsillosModelToJson(BolsillosModel data) => json.encode(data.toJson());
+GastosFijos gastosFijosFromJson(String str) => GastosFijos.fromJson(json.decode(str));
 
-class BolsillosModel {
+String gastosFijosToJson(GastosFijos data) => json.encode(data.toJson());
+
+class GastosFijos {
     int? id;
     Usuario? usuario;
-    String? nombreBolsillo;
+    String? tipo;
+    double? monto;
     String? descripcion;
-    double? saldo;
     DateTime? fecha;
+    int? idCategoria;
 
-    BolsillosModel({
+    GastosFijos({
         this.id,
         this.usuario,
-        this.nombreBolsillo,
+        this.tipo, 
+        this.monto,
         this.descripcion,
-        this.saldo,
         this.fecha,
+        this.idCategoria,
     });
 
-    factory BolsillosModel.fromJson(Map<String, dynamic> json) => BolsillosModel(
+    factory GastosFijos.fromJson(Map<String, dynamic> json) => GastosFijos(
         id: json["id"],
         usuario: Usuario.fromJson(json["usuario"]),
-        nombreBolsillo: json["nombre_bolsillo"],
+        tipo: json["tipo"],
+        monto: json["monto"],
         descripcion: json["descripcion"],
-        saldo: json["saldo"],
         fecha: DateTime.parse(json["fecha"]),
+        idCategoria: json["id_Categoria"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "usuario": usuario?.toJson(),
-        "nombre_bolsillo": nombreBolsillo,
+        "tipo": tipo,
+        "monto": monto,
         "descripcion": descripcion,
-        "saldo": saldo,
         "fecha": fecha?.toIso8601String(),
+        "id_Categoria": idCategoria,
     };
 }
 
@@ -46,7 +51,7 @@ class Usuario {
     String? email;
 
     Usuario({
-        this.id,
+        required this.id,
         this.username,
         this.email,
     });

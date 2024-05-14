@@ -11,6 +11,7 @@ class TransaccionesModel {
     double? monto;
     String? imagen;
     DateTime? fecha;
+    int? id_Categoria;
 
     TransaccionesModel({
         this.user,
@@ -19,6 +20,7 @@ class TransaccionesModel {
         this.monto,
         this.imagen,
         this.fecha,
+        this.id_Categoria,
     });
 
     factory TransaccionesModel.fromJson(Map<String, dynamic> json) => TransaccionesModel(
@@ -28,6 +30,7 @@ class TransaccionesModel {
         monto: json["monto"],
         imagen: json["imagen"],
         fecha: DateTime.parse(json["fecha"]),
+        id_Categoria: json["id_Categoria"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -37,5 +40,6 @@ class TransaccionesModel {
         "monto": monto,
         "imagen": imagen,
         "fecha": fecha?.toIso8601String(),
+        "id_Categoria": id_Categoria,
     };
 }

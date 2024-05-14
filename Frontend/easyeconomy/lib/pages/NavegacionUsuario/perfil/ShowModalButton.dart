@@ -13,8 +13,12 @@ Future Movimientos(
   // varibles para los campos de texto
   TextEditingController Movimiento = TextEditingController();
   TextEditingController concepto = TextEditingController();
+  TextEditingController categoria = TextEditingController();
+
   final _formKey = GlobalKey<FormFieldState>();
   final _formKey2 = GlobalKey<FormFieldState>();
+  final _formKey3 = GlobalKey<FormFieldState>();
+  var id_categoria;
 
   return showModalBottomSheet(
     context: context,
@@ -52,58 +56,85 @@ Future Movimientos(
                   child: TextformFieldMovimientos(context, concepto, 'Concepto',
                       Icons.monetization_on, _formKey2, TextInputType.text)),
               SizedBox(height: 15),
-              Container(
-                  width: MediaQuery.of(context).size.width * 0.90,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                        if (op == 1) {
-                          double valor = double.parse(Movimiento.text.trim());
-                          await CrearTransaccion(
-                              user!, 'ingreso', valor, concepto.text, context);
-                          Navigator.pushReplacement(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.fade,
-                                  child: ProfilePage()));
-                        } else {
-                          double valor = double.parse(Movimiento.text.trim());
-                          double Total = await TotalSaldo(user);
-                          print(Total);
-
-                          if (_formKey.currentState!.validate() &&
-                              _formKey2.currentState!.validate() &&
-                              valor <= Total) {
-                            print('entro');
+              op == 2
+                  ? Container(
+                      width: MediaQuery.of(context).size.width * 0.90,
+                      child: TextformFieldMovimientos(
+                          context,
+                          categoria,
+                          'Categoria',
+                          Icons.monetization_on,
+                          _formKey3,
+                          TextInputType.text))
+                  : SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Container(
+                    width: MediaQuery.of(context).size.width * 0.90,
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          if (op == 1) {
+                            double valor = double.parse(Movimiento.text.trim());
                             await CrearTransaccion(
-                                user!, 'egreso', valor, concepto.text, context);
+                              user!,
+                              'ingreso',
+                              valor,
+                              concepto.text,
+                              id_categoria,
+                              context,
+                            );
                             Navigator.pushReplacement(
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.fade,
                                     child: ProfilePage()));
                           } else {
-                            ShowDialogs.showAlertDialog(context, 'Insufficient balance', 'You do not have enough balance to complete this operation');
+                            double valor = double.parse(Movimiento.text.trim());
+                            if (categoria.text == 'gastos fijos') {
+                              id_categoria = 1;
+                            } else if (categoria.text == 'gastos variables') {
+                              id_categoria = 2;
+                            } else {
+                              id_categoria = 3;
+                            }
+
+                            if (_formKey.currentState!.validate() &&
+                                _formKey2.currentState!.validate() &&
+                                _formKey3.currentState!.validate() &&
+                                id_categoria != 3) {
+                              print('entro');
+                              await CrearTransaccion(user!, 'egreso', valor,
+                                  concepto.text, id_categoria, context);
+                              Navigator.pushReplacement(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: ProfilePage()));
+                            } else {
+                              ShowDialogs.showAlertDialog(context, 'Error',
+                                  'Por favor, seleccione una categoria');
+                            }
                           }
-                        }
-                      },
-                      child: Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * 0.70,
-                        decoration: BoxDecoration(
-                          color: HexColor('5C10C7'),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Registrar',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.normal,
+                        },
+                        child: Container(
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.70,
+                          decoration: BoxDecoration(
+                            color: HexColor('5C10C7'),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Registrar',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.normal,
+                              ),
                             ),
                           ),
-                        ),
-                      ))),
+                        ))),
+              ),
               SizedBox(height: 15),
             ],
           ),

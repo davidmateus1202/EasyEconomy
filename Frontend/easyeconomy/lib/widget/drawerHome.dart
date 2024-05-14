@@ -2,6 +2,7 @@ import 'package:easyeconomy/Chat/ChatPage.dart';
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/pages/Home/Home.dart';
+
 import 'package:easyeconomy/pages/NavegacionUsuario/feed/feed.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/perfil.dart';
 import 'package:easyeconomy/pages/loginPage.dart';
@@ -87,10 +88,8 @@ class _DrawerHomeState extends State<DrawerHome> {
                     leading: Icon(Icons.home),
                     title: const Text('Home', style: TextStyle(fontFamily: 'Poppins'),),
                     onTap: () {
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return Home();
-                      }));
+                      Navigator.pushReplacement(context, PageTransition(child: MyHomePage(), type: PageTransitionType.rightToLeftWithFade));
+
                     },
                   ),
                   Divider(

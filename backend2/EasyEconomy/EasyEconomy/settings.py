@@ -58,9 +58,9 @@ INSTALLED_APPS = [
     #////////////// apps //////////////////////////////
     'user_app',
     'Transacciones',
+    'Historial',
+    'Categoria',
     'Publicaciones',
-    'Sumary',
-    'bolsillo',
 ]
 SITE_ID = 1
 AUTH_USER_MODEL = 'user_app.UserModel'

@@ -34,7 +34,7 @@ class _Container_ButtonsState extends State<Container_Buttons> {
           width: MediaQuery.of(context).size.width * 0.4,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/4.png'),
+              image: AssetImage('assets/images/button.png'),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(36),
@@ -64,7 +64,7 @@ class _Container_ButtonsState extends State<Container_Buttons> {
           width: MediaQuery.of(context).size.width * 0.4,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/4.png'),
+              image: AssetImage('assets/images/button.png'),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(36),

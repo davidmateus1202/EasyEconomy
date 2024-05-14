@@ -1,8 +1,7 @@
 import 'package:easyeconomy/models/BolsillosModel.dart';
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
-import 'package:easyeconomy/service/api.dart';
-import 'package:easyeconomy/service/apiBolsillos.dart';
+import 'package:easyeconomy/service/apiGastos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -30,24 +29,25 @@ class _ContainerBolsillosState extends State<ContainerBolsillos> {
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder<ListarBolsillos?>(
-        future: ApiBolsillos().ObtenerBolsillos(user!),
+        future: ApiBolsillos().ObtenerGastos(user!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasData) {
-            List<BolsillosModel> bolsillos = snapshot.data!.bolsillos;
+            List<GastosFijos> bolsillos = snapshot.data!.bolsillos;
             return Padding(
               padding: const EdgeInsets.all(15),
               child: ListWheelScrollView(
                 physics: FixedExtentScrollPhysics(),
-                itemExtent: 250,
+                itemExtent: 120,
                 children: bolsillos.map((bolsillo) {
                   return Card(
                       elevation: 4,
-                      shadowColor: Colors.white,
-                      color: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(36)),
+                      shadowColor: HexColor('#B401FF'),
+                      color: HexColor('#F3F3F3'),
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.9,
                         child: Column(
@@ -58,12 +58,12 @@ class _ContainerBolsillosState extends State<ContainerBolsillos> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.account_balance_wallet,
+                                    Icons.bookmark_add,
                                     color: HexColor('#B401FF'),
-                                    size: 60,
+                                    size: 50,
                                   ),
                                   Text(
-                                    bolsillo.nombreBolsillo.toString(),
+                                    bolsillo.descripcion.toString(),
                                     maxLines: null,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
@@ -73,28 +73,12 @@ class _ContainerBolsillosState extends State<ContainerBolsillos> {
                                   ),
                                   Expanded(child: Container()),
                                   Text(
-                                    currencyFormat.format(bolsillo.saldo),
+                                    currencyFormat.format(bolsillo.monto),
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontSize: 15,
                                         color: Colors.black),
                                   ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 24, right: 24),
-                              child: Row(
-                                children: [
-                                  Flexible(
-                                      child: Text(
-                                    bolsillo.descripcion.toString(),
-                                    maxLines: null,
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 15,
-                                        color: Colors.black),
-                                  )),
                                 ],
                               ),
                             ),
@@ -105,7 +89,8 @@ class _ContainerBolsillosState extends State<ContainerBolsillos> {
               ),
             );
           } else if (snapshot.hasError) {
-            return Text('Error');
+            print('Error ${snapshot.error}');
+            return Text('Error ${snapshot.error}');
           } else {
             return Text('No hay publicaciones');
           }

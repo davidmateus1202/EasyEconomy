@@ -1,6 +1,7 @@
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/pages/Home/Home.dart';
+import 'package:easyeconomy/pages/NavegacionUsuario/perfil/perfil.dart';
 import 'package:easyeconomy/pages/registerPage.dart';
 import 'package:easyeconomy/service/api.dart';
 import 'package:easyeconomy/widget/topLogo.dart';
@@ -92,7 +93,7 @@ class _Login_PageState extends State<Login_Page> {
       UserModer user = response;
       context.read<UserCubit>().emit(user);
       Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-        return Home();
+        return MyHomePage();
       }));
     }
   }

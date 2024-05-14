@@ -24,7 +24,7 @@ class WidgetPantalla extends StatelessWidget {
                   fontFamily: 'Poppins',
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
-                  color: HexColor('5C10C7')),
+                  color: HexColor('B401FF')),
             ),
             TextSpan(
               text: 'To',

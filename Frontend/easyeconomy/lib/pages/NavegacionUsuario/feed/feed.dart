@@ -109,7 +109,7 @@ class Publicaciones extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Poppins',
                         color: Colors.white,
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -120,7 +120,7 @@ class Publicaciones extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 70),
                   child: Text(
-                    'Estos son los consejos del dia',
+                    'These are the tips of the day',
                     style: TextStyle(
                       fontFamily: 'Poppins',
                       color: Colors.white,

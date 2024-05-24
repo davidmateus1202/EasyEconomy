@@ -7,7 +7,6 @@ class ApiChat {
 
 Future<String> chat(String question) async {
   var url = Uri.parse('${ApiChat.url}');
-  int num_palabras = 300;
   Map<String, String> data = {
     "input_text": question,
   };

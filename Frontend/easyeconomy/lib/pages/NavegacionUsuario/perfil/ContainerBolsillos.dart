@@ -67,7 +67,7 @@ class _ContainerBolsillosState extends State<ContainerBolsillos> {
                                     maxLines: null,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        fontSize: 20,
+                                        fontSize: 15,
                                         fontWeight: FontWeight.bold,
                                         color: HexColor('#B401FF')),
                                   ),
@@ -76,7 +76,7 @@ class _ContainerBolsillosState extends State<ContainerBolsillos> {
                                     currencyFormat.format(bolsillo.monto),
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        fontSize: 15,
+                                        fontSize: 12,
                                         color: Colors.black),
                                   ),
                                 ],

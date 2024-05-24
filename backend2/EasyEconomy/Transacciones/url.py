@@ -9,5 +9,6 @@ urlpatterns = [
     path('getGastosFijos/', views.ListarGastosFijos.as_view()),
     path('obtenerTransaccion/<int:pk>/', views.ObtenerTransaccion),
     path('obtenerTotalIngresos/<int:pk>/', views.getTotalIngresos),
+    path('getExpese/<int:pk>/', views.getExpense),
 
 ]

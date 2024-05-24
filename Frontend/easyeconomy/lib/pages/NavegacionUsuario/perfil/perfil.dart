@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:easyeconomy/pages/Home/BarGraph.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/Gastos.dart';
+import 'package:easyeconomy/pages/NavegacionUsuario/perfil/Semaforo.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/widgetButtons.dart';
 import 'package:flutter/gestures.dart';
 import 'package:image_picker/image_picker.dart';
@@ -144,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   op == 0 ?
                   ContainerMovimientos()
-                  : Expanded(child: BarGraph(),),
+                  : Expanded(child: SemaforoContainer()),
                   SizedBox(
                     height: 20,
                   ),
@@ -192,7 +193,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 itemCount: data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                      height: 120,
                       width: 200,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -239,13 +239,15 @@ class _ProfilePageState extends State<ProfilePage> {
                                               fontSize: 14,
                                               fontWeight: FontWeight.normal),
                                         ),
-                                        Text(
+                                         Text(
                                           data[index].descripcion.toString(),
+                                          maxLines: null,
                                           style: const TextStyle(
                                               fontFamily: 'Poppins',
                                               fontSize: 12,
                                               fontWeight: FontWeight.bold),
                                         ),
+                                        
                                         Text(
                                           DateFormat.yMEd()
                                               .add_jms()
@@ -386,7 +388,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       op = 1;
                     });
                   },
-                  icon: Icon(Icons.person, color: Colors.white,)),
+                  icon: Icon(Icons.category, color: Colors.white,)),
             ],
           )
         ],

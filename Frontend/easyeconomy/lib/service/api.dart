@@ -1,18 +1,16 @@
 import 'dart:convert';
-import 'package:easyeconomy/Utils/Utils.dart';
 import 'package:easyeconomy/models/user_model.dart';
-import 'package:easyeconomy/pages/loginPage.dart';
 import 'package:easyeconomy/widget/AlertDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:http/http.dart' as http;
-import 'package:snippet_coder_utils/hex_color.dart';
+
 
 // clase para manejar las peticiones a la api
 
 class Api {
-  static String BaseUrl = "http://192.168.10.30:8000";
+  static String BaseUrl = "http://10.13.128.159:8000";
 }
 
 // metodo para registrar un usuario

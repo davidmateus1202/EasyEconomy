@@ -1,5 +1,4 @@
 import 'package:easyeconomy/models/user_model.dart';
-import 'package:easyeconomy/service/apiSumary.dart';
 import 'package:easyeconomy/service/apiTransacciones.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/perfil.dart';
 import 'package:easyeconomy/widget/AlertDialog.dart';
@@ -37,7 +36,7 @@ Future Movimientos(
               Padding(
                 padding: const EdgeInsets.all(24.0),
                 child: Text(
-                  'Registra tu ${title}',
+                  'Record your ${title}',
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 15,
@@ -48,12 +47,12 @@ Future Movimientos(
               SizedBox(height: 15),
               Container(
                   width: MediaQuery.of(context).size.width * 0.90,
-                  child: TextformFieldMovimientos(context, Movimiento, 'Valor',
+                  child: TextformFieldMovimientos(context, Movimiento, 'Values',
                       Icons.monetization_on, _formKey, TextInputType.number)),
               SizedBox(height: 15),
               Container(
                   width: MediaQuery.of(context).size.width * 0.90,
-                  child: TextformFieldMovimientos(context, concepto, 'Concepto',
+                  child: TextformFieldMovimientos(context, concepto, 'Concept',
                       Icons.monetization_on, _formKey2, TextInputType.text)),
               SizedBox(height: 15),
               op == 2
@@ -62,10 +61,12 @@ Future Movimientos(
                       child: TextformFieldMovimientos(
                           context,
                           categoria,
-                          'Categoria',
-                          Icons.monetization_on,
+                          'Category',
+                          Icons.category,
                           _formKey3,
                           TextInputType.text))
+
+                          
                   : SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.only(top: 12),
@@ -90,9 +91,9 @@ Future Movimientos(
                                     child: ProfilePage()));
                           } else {
                             double valor = double.parse(Movimiento.text.trim());
-                            if (categoria.text == 'gastos fijos') {
+                            if (categoria.text == 'fixed costs') {
                               id_categoria = 1;
-                            } else if (categoria.text == 'gastos variables') {
+                            } else if (categoria.text == 'variable expends') {
                               id_categoria = 2;
                             } else {
                               id_categoria = 3;
@@ -102,7 +103,7 @@ Future Movimientos(
                                 _formKey2.currentState!.validate() &&
                                 _formKey3.currentState!.validate() &&
                                 id_categoria != 3) {
-                              print('entro');
+
                               await CrearTransaccion(user!, 'egreso', valor,
                                   concepto.text, id_categoria, context);
                               Navigator.pushReplacement(
@@ -112,7 +113,7 @@ Future Movimientos(
                                       child: ProfilePage()));
                             } else {
                               ShowDialogs.showAlertDialog(context, 'Error',
-                                  'Por favor, seleccione una categoria');
+                                  'Please select the category of fixed expenses or variable expenses');
                             }
                           }
                         },

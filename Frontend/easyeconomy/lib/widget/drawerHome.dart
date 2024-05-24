@@ -115,17 +115,6 @@ class _DrawerHomeState extends State<DrawerHome> {
                     endIndent: 16,
                   ),
                   ListTile(
-                    leading: Icon(Icons.chat),
-                    title: const Text('Chat', style: TextStyle(fontFamily: 'Poppins'),),
-                    onTap: () {},
-                  ),
-                  Divider(
-                    height: 10,
-                    thickness: 0.3,
-                    indent: 16,
-                    endIndent: 16,
-                  ),
-                  ListTile(
                     leading: Icon(Icons.feed),
                     title: const Text('Feed', style: TextStyle(fontFamily: 'Poppins'),),
                     onTap: () {

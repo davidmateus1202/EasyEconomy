@@ -1,7 +1,5 @@
 import 'package:cloudinary_flutter/cloudinary_object.dart';
 import 'package:cloudinary_url_gen/cloudinary.dart';
-import 'package:easyeconomy/service/apiChat.dart';
-import 'package:easyeconomy/Chat/ChatPage.dart';
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/perfil.dart';

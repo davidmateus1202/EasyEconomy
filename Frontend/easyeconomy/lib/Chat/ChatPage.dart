@@ -187,6 +187,7 @@ class _ChatFromState extends State<ChatFrom> {
                                 message = messageResponse;
                               });
                             }
+                            _messageCotroller.clear();
 
                             setState(() {
                               isLoading = false;

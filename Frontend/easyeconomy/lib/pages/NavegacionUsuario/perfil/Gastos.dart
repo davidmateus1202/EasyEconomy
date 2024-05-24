@@ -102,7 +102,7 @@ class _BolsilloPageState extends State<BolsilloPage> {
                             child: Row(
                               children: [
                                 Text(
-                                  currencyFormat.format(data['Gastos_Fijos']),
+                                  data['Gastos_Fijos'].toString(),
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 15,

@@ -4,7 +4,6 @@ import 'package:easyeconomy/service/api.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class ApiBolsillos {
   Future<ListarBolsillos?> ObtenerGastos(UserModer user) async {
     var url = Uri.parse('${Api.BaseUrl}/transaccion/getGastosFijos/');
@@ -12,12 +11,9 @@ class ApiBolsillos {
       'Authorization': 'Token ${user.token}',
     });
 
-    if (response.statusCode == 200){
+    if (response.statusCode == 200) {
       return ListarBolsillos.fromList(jsonDecode(response.body));
-
-    }else{
-
-    }
+    } else {}
   }
 }
 
@@ -34,7 +30,8 @@ class ListarBolsillos {
 }
 
 Future getEstados(UserModer user) async {
-  var url = Uri.parse('${Api.BaseUrl}/transaccion/obtenerTotalIngresos/${user.id}/');
+  var url =
+      Uri.parse('${Api.BaseUrl}/transaccion/obtenerTotalIngresos/${user.id}/');
   var response = await http.get(url, headers: {
     'Authorization': 'Token ${user.token}',
   });
@@ -46,3 +43,17 @@ Future getEstados(UserModer user) async {
   }
 }
 
+Future getExpense(UserModer user) async {
+  double Expense = 0;
+  var url = Uri.parse('${Api.BaseUrl}/transaccion/getExpese/${user.id}/');
+  var response = await http.get(url, headers: {
+    'Authorization': 'Token ${user.token}',
+  });
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> json = jsonDecode(response.body);
+    Expense = json['total'];
+    print(Expense);
+    return Expense;
+  }
+}

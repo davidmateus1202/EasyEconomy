@@ -1,7 +1,6 @@
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/pages/Home/Home.dart';
-import 'package:easyeconomy/pages/NavegacionUsuario/perfil/perfil.dart';
 import 'package:easyeconomy/pages/registerPage.dart';
 import 'package:easyeconomy/service/api.dart';
 import 'package:easyeconomy/widget/topLogo.dart';
@@ -60,7 +59,8 @@ class _Login_PageState extends State<Login_Page> {
           ),
         ),
         if (_isloging)
-          Container(
+          Positioned.fill(
+              child: Container(
             color: Colors.black.withOpacity(0.5),
             child: Center(
                 child: Image.asset(
@@ -68,7 +68,7 @@ class _Login_PageState extends State<Login_Page> {
               width: 50,
               height: 50,
             )),
-          )
+          ))
       ],
     ));
   }
@@ -189,19 +189,24 @@ class _Login_PageState extends State<Login_Page> {
       margin: const EdgeInsets.symmetric(horizontal: 90),
       child: ElevatedButton(
         onPressed: () {
-          setState(() {
-            _isloging = true;
-          });
+                      setState(() {
+              _isloging = true;
+            });
           if (_formKeyName.currentState!.validate() &&
               _formKeyPassword.currentState!.validate()) {
             String name = nameController.text.trim();
             String password = passwordController.text.trim();
 
+
+
             login(name, password);
+
+
           }
-          setState(() {
-            _isloging = false;
-          });
+
+                      setState(() {
+              _isloging = false;
+            });
         },
         child: const Text(
           'Login',

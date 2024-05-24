@@ -22,6 +22,7 @@ class _PostPageState extends State<PostPage> {
   File? imagePost;
   TextEditingController _controller = TextEditingController();
   final _formConcepto = GlobalKey<FormFieldState>();
+  bool _isloading = false;
 
   @override
   void initState() {
@@ -51,7 +52,7 @@ class _PostPageState extends State<PostPage> {
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontSize: 20,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.bold,
                   )),
             ]),
@@ -100,7 +101,7 @@ class _PostPageState extends State<PostPage> {
                             key: _formConcepto,
                             maxLines: 10,
                             decoration: InputDecoration(
-                              hintText: 'Why are feeling today?',
+                              hintText: 'What are you thinking today??',
                               hintStyle: TextStyle(fontFamily: 'Poppins'),
                               border: const UnderlineInputBorder(
                                 borderSide: BorderSide.none,
@@ -184,14 +185,23 @@ class _PostPageState extends State<PostPage> {
                                   padding: const EdgeInsets.only(right: 12),
                                   child: ElevatedButton(
                                     onPressed: () async {
+                                      setState(() {
+                                        _isloding = true;
+                                      });
                                       if (_formConcepto.currentState!
                                               .validate() &&
                                           imagePost != null) {
                                         await subirImagenes(context, imagePost!,
                                             _controller.text, user!);
-                                      }else {
-                                        ShowDialogs.showAlertDialog(context, 'Error data', 'Form data is incorrect, please check the data entered');
+                                      } else {
+                                        ShowDialogs.showAlertDialog(
+                                            context,
+                                            'Error data',
+                                            'Form data is incorrect, please check the data entered');
                                       }
+                                      setState(() {
+                                        _isloding = false;
+                                      });
                                     },
                                     style: ButtonStyle(
                                       backgroundColor:
@@ -225,29 +235,6 @@ class _PostPageState extends State<PostPage> {
                                     onPressed: () {},
                                     child: Text(
                                       'Camera',
-                                      style: TextStyle(
-                                          fontFamily: 'Poppins',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.normal),
-                                    )),
-                              ],
-                            )),
-                        Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            child: Divider()),
-                        Padding(
-                            padding: EdgeInsets.only(top: 24, left: 24),
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.photo,
-                                  color: HexColor('9A0EE2'),
-                                  size: 35,
-                                ),
-                                TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      'Nose',
                                       style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontSize: 15,

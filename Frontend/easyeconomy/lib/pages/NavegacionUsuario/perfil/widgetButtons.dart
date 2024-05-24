@@ -1,7 +1,6 @@
 import 'package:easyeconomy/models/user_cubir.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/ShowModalButton.dart';
-import 'package:easyeconomy/service/apiSumary.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:easyeconomy/models/TransaccionModel.dart';
 import 'package:easyeconomy/models/user_model.dart';
 import 'package:easyeconomy/pages/NavegacionUsuario/perfil/perfil.dart';
 import 'package:easyeconomy/service/api.dart';

@@ -99,3 +99,37 @@ def getTotalIngresos(request, pk):
     
 
 
+@api_view(['GET'])
+def getExpense(request, pk):
+    try:
+        user = get_user_model().objects.get(pk=pk)
+
+        # Obtener la fecha actual
+        today = timezone.now()
+
+        # Obtener el primer día del mes actual
+        first_day_of_month = today.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+
+        # Obtener el primer día del siguiente mes
+        if first_day_of_month.month == 12:
+            next_month = first_day_of_month.replace(year=first_day_of_month.year + 1, month=1)
+        else:
+            next_month = first_day_of_month.replace(month=first_day_of_month.month + 1)
+
+        # Obtener el último día del mes actual
+        last_day_of_month = next_month - timezone.timedelta(days=1)
+
+        # Filtrar las transacciones del usuario para el mes actual
+        transacciones_mes_actual = Transaccion.objects.filter(
+            usuario=user,
+            tipo='egreso',
+            fecha__range=(first_day_of_month, last_day_of_month)
+        )
+
+        # Calcular el total de egresos para el mes actual
+        total_egresos = transacciones_mes_actual.aggregate(total=Sum('monto'))['total'] or 0
+        return Response({'total': total_egresos}, status=200)
+    except get_user_model().DoesNotExist:
+        return Response({'error': 'User not found'}, status=404)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)

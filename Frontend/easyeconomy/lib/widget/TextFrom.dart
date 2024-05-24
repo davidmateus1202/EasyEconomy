@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snippet_coder_utils/hex_color.dart';
 
 
 Widget TextformFieldMovimientos(BuildContext context,
@@ -23,6 +24,12 @@ Widget TextformFieldMovimientos(BuildContext context,
         borderRadius: BorderRadius.circular(10),
       ),
       hintText: hintText,
+      hintStyle: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+
+      ),
       prefixIcon: Icon(icon),
     ),
   );

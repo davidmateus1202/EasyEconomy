@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       ),
                       Text(
-                        '\$${data['Ahorro']}',
+                        '\$${data['total']}',
                         style: TextStyle(
                           color: HexColor('#B401FF'),
                           fontSize: 18,
